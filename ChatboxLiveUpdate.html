@@ -40,9 +40,6 @@
 			}
 		});
 		var box = document.getElementById("myDiv");
-		box.style.color = "black";
-                box.style.backgroundColor  = "#fbfbfb";
-                box.style.padding = "5px";
 
 		var field = document.createElement('fieldset');
 		
@@ -55,6 +52,9 @@
 				console.log("Entered header generation if statement");
                 				show = true;
                 				field.appendChild(document.createTextNode(headerText));
+						box.style.color = "black";
+                				box.style.backgroundColor  = "#fbfbfb";
+               					box.style.padding = "5px";
 						box.appendChild(field);
                 				var sidebar = document.querySelector("div.formContent.embeddedServiceSidebarForm");
                 				sidebar.insertBefore(box, sidebar.childNodes[0]);
@@ -81,6 +81,9 @@
                 				show = true;
 						box.removeChild(fieldset);
                 				field.appendChild(document.createTextNode(headerText));
+						box.style.color = "black";
+                				box.style.backgroundColor  = "#fbfbfb";
+                				box.style.padding = "5px";
 						box.appendChild(field);
                 				var sidebar = document.querySelector("div.formContent.embeddedServiceSidebarForm");
                 				sidebar.insertBefore(box, sidebar.childNodes[0]);
@@ -93,6 +96,9 @@
                 				show = true;
 						box.removeChild(fieldset);
                 				field.appendChild(document.createTextNode(headerText));
+						box.style.color = "black";
+               					box.style.backgroundColor  = "#fbfbfb";
+                				box.style.padding = "5px";
 						box.appendChild(field);
                 				var sidebar = document.querySelector("div.formContent.embeddedServiceSidebarForm");
                 				sidebar.insertBefore(box, sidebar.childNodes[0]);
