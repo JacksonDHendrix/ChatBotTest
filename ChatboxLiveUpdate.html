@@ -79,7 +79,7 @@
 						console.log("Agent has logged in");
 						console.log("Generating new header");
                 				show = true;
-						box.removeChild(fieldset);
+						fieldset.remove();
                 				field.appendChild(document.createTextNode(headerText));
 						box.style.color = "black";
                 				box.style.backgroundColor  = "#fbfbfb";
@@ -94,7 +94,7 @@
 						console.log("Agent has logged off");
 						console.log("Generating new header");
                 				show = true;
-						box.removeChild(fieldset);
+						fieldset.remove();
                 				field.appendChild(document.createTextNode(headerText));
 						box.style.color = "black";
                					box.style.backgroundColor  = "#fbfbfb";
