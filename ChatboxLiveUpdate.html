@@ -83,9 +83,9 @@
 						console.log("Agent has logged in");
 						console.log("Generating new header");
                 				show = true;
-						box.removeChild(field);
-                				field.appendChild(document.createTextNode(headerText));
-						box.appendChild(field);
+						var y = box.childNodes[0]
+						box.removeChild(y);
+                				box.appendChild(document.createTextNode(headerText));
                 				var sidebar = document.querySelector("div.formContent.embeddedServiceSidebarForm");
                 				sidebar.insertBefore(box, sidebar.childNodes[0]);
 					} else {
@@ -95,9 +95,9 @@
 						console.log("Agent has logged off");
 						console.log("Generating new header");
                 				show = true;
-						box.removeChild(field);
-                				field.appendChild(document.createTextNode(headerText));
-						box.appendChild(field);
+						var y = box.childNodes[0]
+						box.removeChild(y);
+                				box.appendChild(document.createTextNode(headerText));
                 				var sidebar = document.querySelector("div.formContent.embeddedServiceSidebarForm");
                 				sidebar.insertBefore(box, sidebar.childNodes[0]);
 					}
