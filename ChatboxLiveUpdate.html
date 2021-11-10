@@ -39,7 +39,7 @@
 				console.log("Agent found to be offline");
 			}
 		});
-		var box = document.createElement("myDiv");
+		var box;
 
 		var field = document.createElement('fieldset');
 		
@@ -52,6 +52,7 @@
 				console.log("Entered header generation if statement");
                 				show = true;
                 				field.appendChild(document.createTextNode(headerText));
+						box = document.createElement("myDiv");
 						box.style.color = "black";
                 				box.style.backgroundColor  = "#fbfbfb";
 						box.appendChild(field);
