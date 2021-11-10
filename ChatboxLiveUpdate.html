@@ -28,15 +28,12 @@
 		var agentOnline;
 
 		embedded_svc.addEventHandler("onSettingsCallCompleted", function(data) {
-    			console.log("onSettingsCallCompleted event was fired. Agent availability status is " + data.isAgentAvailable ? "online": "offline");
 			agentOnline = data.isAgentAvailable ? true: false;
 
             			if(agentOnline) {
 				headerText = "Please provide the following information to start a chat with Customer Care.";
-				console.log("Agent found to be online");
 			} else {
 				headerText = "Please submit your issue and Customer Care will respond, typically within one business day.";
-				console.log("Agent found to be offline");
 			}
 		});
 		var box;
@@ -44,13 +41,9 @@
 		var show = false;
 
         		embedded_svc.addEventHandler("afterMaximize", function(data) {
-            			console.log("afterMaximize event was fired.");
 
             			if (!show) {
-				console.log("Entered header generation if statement");
                 				show = true;
-						//field = document.createElement('fieldset');
-                				//field.appendChild(document.createTextNode(headerText));
 						box = document.createElement("div");
 						box.style.color = "black";
                 				box.style.backgroundColor  = "#fbfbfb";
@@ -63,21 +56,16 @@
     	    	});
 
 		embedded_svc.addEventHandler("afterDestroy", function(data) {
-    			console.log("afterDestroy");
 			show = false;
 		});
 
 		embedded_svc.addEventHandler("onAvailability", function(data) {
-    			console.log("Is agent online: " + agentOnline);
 			var agentOnlineNew = data.isAgentAvailable ? true: false;
-			console.log("Is agent online new: " + agentOnlineNew);
 			if (agentOnlineNew != agentOnline){
 				if (show) {
 					if (agentOnlineNew){
 						headerText = "Please provide the following information to start a chat with Customer Care.";
 						agentOnline = agentOnlineNew;
-						console.log("Agent has logged in");
-						console.log("Generating new header");
                 				show = true;
 						var y = box.childNodes[0]
 						box.removeChild(y);
@@ -88,8 +76,6 @@
 
 						headerText = "Please submit your issue and Customer Care will respond, typically within one business day.";
 						agentOnline = agentOnlineNew;
-						console.log("Agent has logged off");
-						console.log("Generating new header");
                 				show = true;
 						var y = box.childNodes[0]
 						box.removeChild(y);
