@@ -51,13 +51,13 @@
             			if (!show) {
 				console.log("Entered header generation if statement");
                 				show = true;
-						field = document.createElement('fieldset');
-                				field.appendChild(document.createTextNode(headerText));
-						box = document.createElement("myDiv");
+						//field = document.createElement('fieldset');
+                				//field.appendChild(document.createTextNode(headerText));
+						box = document.createElement("div");
 						box.style.color = "black";
                 				box.style.backgroundColor  = "#fbfbfb";
 						box.style.padding = "5px";
-						box.appendChild(field);
+						box.appendChild(document.createTextNode(headerText));
                 				var sidebar = document.querySelector("div.formContent.embeddedServiceSidebarForm");
                 				sidebar.insertBefore(box, sidebar.childNodes[0]);
             			}
