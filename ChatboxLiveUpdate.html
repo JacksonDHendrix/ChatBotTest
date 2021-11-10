@@ -41,7 +41,7 @@
 		});
 		var box;
 
-		var field = document.createElement('fieldset');
+		var field;
 		
 		var show = false;
 
@@ -51,6 +51,7 @@
             			if (!show) {
 				console.log("Entered header generation if statement");
                 				show = true;
+						field = document.createElement('fieldset');
                 				field.appendChild(document.createTextNode(headerText));
 						box = document.createElement("myDiv");
 						box.style.color = "black";
