@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ChatbotTest</title>
+</head>
+<body>
+    <meta>
+        <style type='text/css'>
+	.embeddedServiceHelpButton .helpButton .uiButton {
+		background-color: #0660ac;
+		font-family: "Salesforce Sans", sans-serif;
+	}
+	.embeddedServiceHelpButton .helpButton .uiButton:focus {
+		outline: 1px solid #0660ac;
+	}
+	@font-face {
+		font-family: 'Salesforce Sans';
+		src: url('https://c1.sfdcstatic.com/etc/clientlibs/sfdc-aem-master/clientlibs_base/fonts/SalesforceSans-Regular.woff') format('woff'),
+		url('https://c1.sfdcstatic.com/etc/clientlibs/sfdc-aem-master/clientlibs_base/fonts/SalesforceSans-Regular.ttf') format('truetype');
+	}
+</style>
+
+<script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
+<script type='text/javascript'>
+	var initESW = function(gslbBaseURL) {
+		var headerText = "";
+		var agentOnline;
+
+		embedded_svc.addEventHandler("onSettingsCallCompleted", function(data) {
+    			console.log("onSettingsCallCompleted event was fired. Agent availability status is " + data.isAgentAvailable ? "online": "offline");
+			agentOnline = data.isAgentAvailable ? true: false;
+
+            			if(agentOnline) {
+				headerText = "Please provide the following information to start a chat with Customer Care.";
+				console.log("Agent found to be online");
+			} else {
+				headerText = "Please submit your issue and Customer Care will respond, typically within one business day.";
+				console.log("Agent found to be offline");
+			}
+		});
+
+		var show = false;
+
+        		embedded_svc.addEventHandler("afterMaximize", function(data) {
+            			console.log("afterMaximize event was fired.");
+
+            			if (!show) {
+				console.log("Entered header generation if statement");
+                				show = true;
+                				var li2 = document.createElement("div");
+                				li2.style.color = "black";
+                				li2.style.backgroundColor  = "#fbfbfb";
+                				li2.style.padding = "5px";
+                				li2.appendChild(document.createTextNode(headerText));
+
+                				var sidebar = document.querySelector("div.formContent.embeddedServiceSidebarForm");
+
+                				sidebar.insertBefore(li2, sidebar.childNodes[0]);
+            			}
+
+    	    	});
+
+		embedded_svc.addEventHandler("afterDestroy", function(data) {
+    			console.log("afterDestroy");
+			show = false;
+		});
+
+		embedded_svc.addEventHandler("onAvailability", function(data) {
+    			console.log("onAvailability event was fired. Agent availability status is " + data.isAgentAvailable ? "online": "offline");
+			var agentOnlineNew = data.isAgentAvailable ? true: false;
+			if (agentOnlineNew != agentOnline){
+				if (show) {
+					if (agentOnlineNew){
+						headerText = "Please provide the following information to start a chat with Customer Care.";
+						agentOnline = agentOnlineNew;
+						console.log("Agent has logged in");
+						console.log("Generating new header");
+                				show = true;
+                				var li2 = document.createElement("div");
+                				li2.style.color = "black";
+                				li2.style.backgroundColor  = "#fbfbfb";
+                				li2.style.padding = "5px";
+                				li2.appendChild(document.createTextNode(headerText));
+                				li2.replaceWith(li2);
+					} else {
+
+						headerText = "Please submit your issue and Customer Care will respond, typically within one business day.";
+						agentOnline = agentOnlineNew;
+						console.log("Agent has logged off");
+						console.log("Generating new header");
+                				show = true;
+                				var li2 = document.createElement("div");
+                				li2.style.color = "black";
+                				li2.style.backgroundColor  = "#fbfbfb";
+                				li2.style.padding = "5px";
+                				li2.appendChild(document.createTextNode(headerText));
+                				li2.replaceWith(li2);
+					}
+				}
+			}
+		});
+
+		embedded_svc.settings.displayHelpButton = true; //Or false
+		embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'
+
+		embedded_svc.settings.defaultMinimizedText = 'Chat with Support'; //(Defaults to Chat with an Expert)
+		//embedded_svc.settings.disabledMinimizedText = '...'; //(Defaults to Agent Offline)
+
+		//embedded_svc.settings.loadingText = ''; //(Defaults to Loading)
+		//embedded_svc.settings.storageDomain = 'yourdomain.com'; //(Sets the domain for your deployment so that visitors can navigate subdomains during a chat session)
+
+		// Settings for Chat
+		//embedded_svc.settings.directToButtonRouting = function(prechatFormData) {
+			// Dynamically changes the button ID based on what the visitor enters in the pre-chat form.
+			// Returns a valid button ID.
+		//};
+		//embedded_svc.settings.prepopulatedPrechatFields = {}; //Sets the auto-population of pre-chat form fields
+		//embedded_svc.settings.fallbackRouting = []; //An array of button IDs, user IDs, or userId_buttonId
+		//embedded_svc.settings.offlineSupportMinimizedText = 'Contact Support'; //(Defaults to Contact Us)
+
+		embedded_svc.settings.enabledFeatures = ['LiveAgent'];
+		embedded_svc.settings.entryFeature = 'LiveAgent';
+
+		embedded_svc.init(
+			'https://careersafe.my.salesforce.com',
+			'https://careersafe.force.com/sdtools',
+			gslbBaseURL,
+			'00DG0000000h9mk',
+			'CS_Chat',
+			{
+				baseLiveAgentContentURL: 'https://c.la3-c1-ia4.salesforceliveagent.com/content',
+				deploymentId: '5724w000000fxXu',
+				buttonId: '5734w000000fxYx',
+				baseLiveAgentURL: 'https://d.la3-c1-ia4.salesforceliveagent.com/chat',
+				eswLiveAgentDevName: 'CS_Chat',
+				isOfflineSupportEnabled: true
+			}
+		);
+	};
+
+	if (!window.embedded_svc) {
+		var s = document.createElement('script');
+		s.setAttribute('src', 'https://careersafe.my.salesforce.com/embeddedservice/5.0/esw.min.js');
+		s.onload = function() {
+			initESW(null);
+		};
+		document.body.appendChild(s);
+	} else {
+		initESW('https://service.force.com');
+	}
+</script>
+</body>
+</html>
