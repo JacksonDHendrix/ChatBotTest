@@ -107,20 +107,20 @@
 
 		embedded_svc.settings.enabledFeatures = ['LiveAgent'];
 		embedded_svc.settings.entryFeature = 'LiveAgent';
-
+		
 		embedded_svc.init(
-			'https://careersafe.my.salesforce.com',
-			'https://careersafe.force.com/sdtools',
+			'https://careersafe--devjackson.my.salesforce.com',
+			'https://devjackson-careersafe.cs16.force.com/sdtools',
 			gslbBaseURL,
-			'00DG0000000h9mk',
-			'CS_Chat',
+			'00Df0000003dKS9',
+			'JacksonSandChat',
 			{
-				baseLiveAgentContentURL: 'https://c.la3-c1-ia4.salesforceliveagent.com/content',
-				deploymentId: '5724w000000fxXu',
-				buttonId: '5734w000000fxYx',
-				baseLiveAgentURL: 'https://d.la3-c1-ia4.salesforceliveagent.com/chat',
-				eswLiveAgentDevName: 'CS_Chat',
-				isOfflineSupportEnabled: true
+				baseLiveAgentContentURL: 'https://c.la1-c1cs-ord.salesforceliveagent.com/content',
+				deploymentId: '5724w000000sXtR',
+				buttonId: '5734w000000oLkZ',
+				baseLiveAgentURL: 'https://d.la1-c1cs-ord.salesforceliveagent.com/chat',
+				eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04If000000000R9EAI_17fad1db046',
+				isOfflineSupportEnabled: false
 			}
 		);
 	};
